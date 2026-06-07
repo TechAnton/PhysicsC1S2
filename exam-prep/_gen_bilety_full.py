@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
-"""Generate билеты.html with full lecture content."""
+"""Generate билеты.html with full lecture content and pre-rendered MathML."""
 import html as html_mod
 import re
 from pathlib import Path
+
+from latex2mathml.converter import convert as latex2mathml
 
 ROOT = Path(__file__).parent.parent
 LECTURES = sorted((ROOT / "lectures").glob("*.md"))
@@ -40,13 +42,15 @@ header a { color:var(--accent); }
 .answer-body li { margin-bottom:4px; }
 .answer-body blockquote { background:#ecfdf5; border-left:4px solid #10b981; padding:10px 14px; margin:12px 0; font-size:.9rem; border-radius:0 6px 6px 0; }
 .answer-body table { width:100%; border-collapse:collapse; margin:10px 0; font-size:.85rem; }
-.answer-body th, .answer-body td { border:1px solid var(--border); padding:6px 10px; text-align:left; }
+.answer-body th, .answer-body td { border:1px solid var(--border); padding:6px 10px; text-align:left; vertical-align:top; }
 .answer-body th { background:#f3f4f6; }
 .answer-body hr { border:none; border-top:1px solid var(--border); margin:16px 0; }
 .answer-body code { background:#e5e7eb; padding:1px 5px; border-radius:3px; font-size:.85em; }
 .answer-body pre { background:#1e293b; color:#e2e8f0; padding:12px; border-radius:6px; overflow-x:auto; margin:10px 0; font-size:.82rem; white-space:pre; }
 .answer-body strong { color:#1f2937; }
-.mjx-block { margin:12px 0; overflow-x:auto; }
+.math-display { margin:12px 0; overflow-x:auto; text-align:center; }
+.answer-body math { font-size:1.05em; }
+.math-fallback { background:#fef2f2; color:#991b1b; padding:2px 6px; border-radius:4px; font-size:.85em; }
 @media (max-width:768px) {
   .layout { flex-direction:column; }
   .topics { width:100%; max-width:none; max-height:38vh; position:relative; top:0; }
@@ -56,6 +60,17 @@ header a { color:var(--accent); }
 """
 
 
+def latex_to_html(latex: str, display: bool = False) -> str:
+    try:
+        ml = latex2mathml(latex)
+        if display:
+            ml = ml.replace('display="inline"', 'display="block"', 1)
+            return f'<div class="math-display">{ml}</div>'
+        return ml
+    except Exception:
+        return f'<code class="math-fallback">{html_mod.escape(latex)}</code>'
+
+
 def protect_math(text: str) -> tuple[str, dict]:
     store = {}
     n = 0
@@ -63,15 +78,14 @@ def protect_math(text: str) -> tuple[str, dict]:
     def repl_display(m):
         nonlocal n
         key = f'%%MATHD{n}%%'
-        inner = m.group(1).strip()
-        store[key] = f'<div class="mjx-block">\\[{inner}\\]</div>'
+        store[key] = latex_to_html(m.group(1).strip(), display=True)
         n += 1
         return key
 
     def repl_inline(m):
         nonlocal n
         key = f'%%MATHI{n}%%'
-        store[key] = f'\\({m.group(1)}\\)'
+        store[key] = latex_to_html(m.group(1).strip(), display=False)
         n += 1
         return key
 
@@ -82,6 +96,7 @@ def protect_math(text: str) -> tuple[str, dict]:
 
 def restore_math(text: str, store: dict) -> str:
     for k, v in store.items():
+        text = text.replace(html_mod.escape(k), v)
         text = text.replace(k, v)
     return text
 
@@ -91,6 +106,23 @@ def inline_fmt(text: str) -> str:
     text = re.sub(r'\*\*(.+?)\*\*', r'<strong>\1</strong>', text)
     text = re.sub(r'`([^`]+)`', r'<code>\1</code>', text)
     return text
+
+
+def fmt_content(text: str, math_store: dict) -> str:
+    return restore_math(inline_fmt(text), math_store)
+
+
+def emit_blocks(text: str, out: list) -> None:
+    """Emit paragraphs and display-math blocks without invalid <p><div>."""
+    parts = re.split(r'(<div class="math-display">.*?</div>)', text, flags=re.DOTALL)
+    for part in parts:
+        part = part.strip()
+        if not part:
+            continue
+        if part.startswith('<div class="math-display">'):
+            out.append(part)
+        else:
+            out.append(f'<p>{part}</p>')
 
 
 def md_to_html(md: str) -> str:
@@ -108,7 +140,9 @@ def md_to_html(md: str) -> str:
         out.append('<table>')
         for ri, row in enumerate(table_rows):
             tag = 'th' if ri == 0 else 'td'
-            out.append('<tr>' + ''.join(f'<{tag}>{inline_fmt(c)}</{tag}>' for c in row) + '</tr>')
+            out.append('<tr>' + ''.join(
+                f'<{tag}>{fmt_content(c, math_store)}</{tag}>' for c in row
+            ) + '</tr>')
         out.append('</table>')
         table_rows = []
         in_table = False
@@ -138,7 +172,6 @@ def md_to_html(md: str) -> str:
             continue
 
         if line.startswith('```'):
-            lang = line[3:].strip()
             i += 1
             buf = []
             while i < len(lines) and not lines[i].startswith('```'):
@@ -149,24 +182,24 @@ def md_to_html(md: str) -> str:
             continue
 
         if line.startswith('## '):
-            out.append(f'<h3>{inline_fmt(line[3:].strip())}</h3>')
+            out.append(f'<h3>{fmt_content(line[3:].strip(), math_store)}</h3>')
             i += 1
             continue
 
         if line.startswith('### '):
-            out.append(f'<h4>{inline_fmt(line[4:].strip())}</h4>')
+            out.append(f'<h4>{fmt_content(line[4:].strip(), math_store)}</h4>')
             i += 1
             continue
 
         if line.startswith('> '):
-            out.append(f'<blockquote>{inline_fmt(line[2:].strip())}</blockquote>')
+            out.append(f'<blockquote>{fmt_content(line[2:].strip(), math_store)}</blockquote>')
             i += 1
             continue
 
         if re.match(r'^[\-\*]\s+', line):
             out.append('<ul>')
             while i < len(lines) and re.match(r'^[\-\*]\s+', lines[i]):
-                out.append(f'<li>{inline_fmt(lines[i][2:].strip())}</li>')
+                out.append(f'<li>{fmt_content(lines[i][2:].strip(), math_store)}</li>')
                 i += 1
             out.append('</ul>')
             continue
@@ -175,7 +208,7 @@ def md_to_html(md: str) -> str:
             out.append('<ol>')
             while i < len(lines) and re.match(r'^\d+\.\s+', lines[i]):
                 item = re.sub(r'^\d+\.\s+', '', lines[i]).strip()
-                out.append(f'<li>{inline_fmt(item)}</li>')
+                out.append(f'<li>{fmt_content(item, math_store)}</li>')
                 i += 1
             out.append('</ol>')
             continue
@@ -191,19 +224,17 @@ def md_to_html(md: str) -> str:
                     break
                 if re.match(r'^[\-\*]\s+', nxt) or re.match(r'^\d+\.\s+', nxt):
                     break
+                if re.match(r'^%%MATHD\d+%%$', nxt.strip()):
+                    break
                 para += ' ' + nxt.strip()
                 i += 1
-            restored = restore_math(inline_fmt(para), math_store)
-            if restored.strip().startswith('<div class="mjx-block">') and restored.count('<div') == 1:
-                out.append(restored)
-            else:
-                out.append(f'<p>{restored}</p>')
+            emit_blocks(fmt_content(para, math_store), out)
             continue
 
         i += 1
 
     flush_table()
-    return restore_math('\n'.join(out), math_store)
+    return '\n'.join(out)
 
 
 def extract_title(md: str) -> str:
@@ -227,8 +258,6 @@ def main():
         '<meta name="viewport" content="width=device-width,initial-scale=1">',
         '<title>Физика C1S2 — полные ответы по билетам</title>',
         f'<style>{CSS}</style>',
-        '<script>window.MathJax={tex:{inlineMath:[["\\\\(","\\\\)"]],displayMath:[["\\\\[","\\\\]"]]},startup:{typeset:false}};</script>',
-        '<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>',
         '</head><body>',
         '<header><h1>Физика C1S2 — полные ответы по билетам</h1>',
         '<p>Нажми тему слева · полный готовый ответ · <a href="шпаргалка.html">Шпаргалка</a></p></header>',
@@ -258,13 +287,11 @@ function show(n) {
   document.querySelectorAll('.topic-btn').forEach(b => b.classList.toggle('active', +b.dataset.n === n));
   document.querySelectorAll('.answer').forEach(a => a.classList.remove('active'));
   document.getElementById('placeholder').style.display = 'none';
-  const el = document.getElementById('a' + n);
-  el.classList.add('active');
-  if (window.MathJax && MathJax.typesetPromise) MathJax.typesetPromise([el]);
+  document.getElementById('a' + n).classList.add('active');
   if (window.innerWidth <= 768) document.getElementById('content').scrollIntoView({behavior:'smooth'});
 }
 const m = location.hash.match(/^#b(\\d+)$/);
-if (m) show(+m[1]); else show(1);
+show(m ? +m[1] : 1);
 </script></body></html>''')
 
     out_path = Path(__file__).parent / 'билеты.html'
