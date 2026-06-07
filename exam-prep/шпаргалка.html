@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Физика C1S2 — шпаргалка (42 билета)</title>
+<style>
+  :root { --bg:#f4f6f9; --card:#fff; --accent:#1e40af; --red:#b91c1c; --text:#111827; --muted:#6b7280; --border:#d1d5db; --say:#ecfdf5; --form:#eff6ff; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font: 13px/1.5 'Segoe UI', system-ui, sans-serif; background: var(--bg); color: var(--text); padding: 10px; max-width: 960px; margin: 0 auto; }
+  h1 { font-size: 1.2rem; text-align: center; margin-bottom: 2px; }
+  .sub { text-align: center; color: var(--muted); font-size: 0.78rem; margin-bottom: 10px; }
+  nav { display: flex; flex-wrap: wrap; gap: 3px; justify-content: center; margin-bottom: 12px; position: sticky; top: 0; background: var(--bg); padding: 6px 0; z-index: 10; border-bottom: 1px solid var(--border); }
+  nav a { font-size: 0.68rem; padding: 2px 5px; background: var(--card); border: 1px solid var(--border); border-radius: 3px; text-decoration: none; color: var(--accent); }
+  .section-title { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); margin: 12px 0 5px; padding-left: 4px; border-left: 3px solid var(--accent); }
+  .card { background: var(--card); border: 1px solid var(--border); border-radius: 6px; padding: 10px 12px; margin-bottom: 7px; page-break-inside: avoid; }
+  .card h2 { font-size: 0.88rem; color: var(--accent); margin-bottom: 6px; line-height: 1.35; }
+  .card h2 .num { color: var(--red); font-weight: 800; margin-right: 4px; }
+  .tag { display: inline-block; font-size: 0.62rem; padding: 1px 5px; border-radius: 3px; margin-left: 4px; vertical-align: middle; background: #fee2e2; color: var(--red); font-weight: 600; }
+  .say { background: var(--say); border-left: 3px solid #10b981; padding: 6px 8px; margin-bottom: 6px; font-size: 0.8rem; border-radius: 0 4px 4px 0; }
+  .say b { color: #047857; font-size: 0.7rem; text-transform: uppercase; display: block; margin-bottom: 2px; }
+  .formulas { background: var(--form); border-left: 3px solid var(--accent); padding: 6px 8px; margin-bottom: 6px; font-size: 0.8rem; border-radius: 0 4px 4px 0; }
+  .formulas b { color: var(--accent); font-size: 0.7rem; text-transform: uppercase; display: block; margin-bottom: 3px; }
+  .card ul { padding-left: 16px; margin: 0; font-size: 0.8rem; }
+  .card li { margin-bottom: 2px; }
+  .f { font-family: 'Cambria Math', Georgia, serif; background: #e5e7eb; padding: 0 4px; border-radius: 2px; font-size: 0.82rem; }
+  .const-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px 10px; font-size: 0.76rem; }
+  @media print { nav { display: none; } body { font-size: 10px; } .card { padding: 6px; } }
+</style>
+</head>
+<body>
+
+<h1>Физика C1S2 — шпаргалка</h1>
+<p class="sub">42 билета · полные названия · формулы · что сказать</p>
+
+<nav>
+  <a href="#b1">1</a><a href="#b2">2</a><a href="#b3">3</a><a href="#b4">4</a><a href="#b5">5</a>
+  <a href="#b6">6</a><a href="#b7">7</a><a href="#b8">8</a><a href="#b9">9</a><a href="#b10">10</a>
+  <a href="#b11">11</a><a href="#b12">12</a><a href="#b13">13</a><a href="#b14">14</a><a href="#b15">15</a>
+  <a href="#b16">16</a><a href="#b17">17</a><a href="#b18">18</a><a href="#b19">19</a><a href="#b20">20</a>
+  <a href="#b21">21</a><a href="#b22">22</a><a href="#b23">23</a><a href="#b24">24</a><a href="#b25">25</a>
+  <a href="#b26">26</a><a href="#b27">27</a><a href="#b28">28</a><a href="#b29">29</a><a href="#b30">30</a>
+  <a href="#b31">31</a><a href="#b32">32</a><a href="#b33">33</a><a href="#b34">34</a><a href="#b35">35</a>
+  <a href="#b36">36</a><a href="#b37">37</a><a href="#b38">38</a><a href="#b39">39</a><a href="#b40">40</a>
+  <a href="#b41">41</a><a href="#b42">42</a><a href="#const">K</a>
+</nav>
+
+<!-- ========== 1–7 ========== -->
+<div class="section-title">Электростатика · билеты 1–7</div>
+
+<div class="card" id="b1">
+<h2><span class="num">1.</span> Электрический заряд и его свойства. Закон Кулона. Напряжённость электростатического поля. Принцип суперпозиции полей. <span class="tag">!</span></h2>
+<div class="say"><b>Что сказать</b>Заряд — свойство тела (+ и −). Закон Кулона: сила между точечными зарядами. E показывает силу на единичный + заряд. Поля от нескольких зарядов складываются векторно.</div>
+<div class="formulas"><b>Формулы</b>
+<span class="f">F = kq₁q₂/r²</span> · <span class="f">E = F/q₀</span> · <span class="f">E = kq/r²</span> · <span class="f">E = ΣEᵢ</span> · <span class="f">q = ne</span>, e = 1,6·10⁻¹⁹ Кл, k ≈ 9·10⁹
+</div>
+<ul>
+<li>Свойства: два типа, сохранение, квантование, аддитивность</li>
+<li>Одноимённые отталкиваются, разноимённые притягиваются</li>
+<li>Линии E: из +, в −; гуще — сильнее поле</li>
+</ul>
+</div>
+
+<div class="card" id="b2">
+<h2><span class="num">2.</span> Теорема Гаусса для электростатического поля в интегральной форме. Поле бесконечно длинной заряженной нити. <span class="tag">!</span></h2>
+<div class="say"><b>Что сказать</b>Поток E через замкнутую поверхность = заряд внутри / ε₀. Для симметричных задач удобно. Нить: E убывает как 1/r.</div>
+<div class="formulas"><b>Формулы</b>
+<span class="f">∮E·dS = q_внутр/ε₀</span> · нить: <span class="f">E = λ/(2πε₀r)</span> · плоскость: <span class="f">E = σ/(2ε₀)</span> · сфера снаружи: <span class="f">E = kQ/r²</span>
+</div>
+<ul>
+<li>Гауссова поверхность подбирают под симметрию (цилиндр для нити)</li>
+<li>λ — линейная плотность заряда (Кл/м)</li>
+</ul>
+</div>
+
+<div class="card" id="b3">
+<h2><span class="num">3.</span> Потенциал электростатического поля. Потенциал поля точечного заряда, системы зарядов. Связь потенциала и напряжённости поля. <span class="tag">!</span></h2>
+<div class="say"><b>Что сказать</b>φ — энергия единичного + заряда в точке. Скаляр — складывать проще. E направлен к убыванию φ.</div>
+<div class="formulas"><b>Формулы</b>
+<span class="f">φ = kq/r</span> · <span class="f">φ = Σφᵢ</span> · <span class="f">E = −dφ/dr</span> · <span class="f">A = q(φ₁−φ₂)</span> · <span class="f">U = φ₁−φ₂</span>
+</div>
+<ul>
+<li>Единица: В = Дж/Кл</li>
+<li>Эквипотенциали ⊥ линиям E</li>
+<li>Энергия заряда: W = qφ</li>
+</ul>
+</div>
+
+<div class="card" id="b4">
+<h2><span class="num">4.</span> Диполь. Электрический момент диполя. Момент сил, действующих на диполь.</h2>
+<div class="say"><b>Что сказать</b>Два заряда ±q на расстоянии l. Момент p от − к +. В однородном поле — поворот, сила = 0.</div>
+<div class="formulas"><b>Формулы</b>
+<span class="f">p = ql</span> · <span class="f">M = [p×E]</span>, M = pE sinα · <span class="f">W = −pE cosα</span>
+</div>
+<ul>
+<li>Устойчиво: p ∥ E · Неустойчиво: p против E</li>
+<li>В неоднородном поле — ещё сила (втягивание)</li>
+</ul>
+</div>
+
+<div class="card" id="b5">
+<h2><span class="num">5.</span> Проводники. Проводники в электростатическом поле. Электростатическая индукция. Поле внутри заряженного проводника и у его поверхности. Электростатическая защита. <span class="tag">!</span></h2>
+<div class="say"><b>Что сказать</b>В равновесии E=0 внутри, заряд на поверхности. Индукция — перераспределение ±. Клетка Фарадея — защита.</div>
+<div class="formulas"><b>Формулы</b>
+<span class="f">E_внутри = 0</span> · <span class="f">E = σ/ε₀</span> ⊥ поверхности · весь проводник: φ = const
+</div>
+<ul>
+<li>Индукция: суммарный заряд не меняется</li>
+<li>Полая оболочка: внутри полости E=0 всегда</li>
+<li>Острые выступы → больше σ → риск пробоя</li>
+</ul>
+</div>
+
+<div class="card" id="b6">
+<h2><span class="num">6.</span> Электроёмкость уединённого проводника. Электроёмкость Земли.</h2>
+<div class="say"><b>Что сказать</b>C = Q/U — «сколько заряда при данном напряжении». Зависит от размера и формы, не от материала. Земля ≈ 700 мкФ.</div>
+<div class="formulas"><b>Формулы</b>
+<span class="f">C = Q/U</span> · шар: <span class="f">C = 4πε₀R</span> · <span class="f">C_Земли ≈ 700 мкФ</span> · <span class="f">W = CU²/2</span>
+</div>
+<ul>
+<li>Уединённый — далеко от других тел</li>
+<li>Заземление: потенциал Земли ≈ 0</li>
+</ul>
+</div>
+
+<div class="card" id="b7">
+<h2><span class="num">7.</span> Взаимная ёмкость двух проводников. Электроёмкость плоского, сферического и цилиндрического конденсаторов. Соединения конденсаторов. <span class="tag">!</span></h2>
+<div class="say"><b>Что сказать</b>Конденсатор — два проводника с диэлектриком. C растёт с S и ε, падает с d. Соединения — наоборот резисторам!</div>
+<div class="formulas"><b>Формулы</b>
+<span class="f">C = Q/U</span> · плоский: <span class="f">C = ε₀εS/d</span> · сфера: <span class="f">C = 4πε₀R₁R₂/(R₂−R₁)</span> · цилиндр: <span class="f">C = 2πε₀εL/ln(R₂/R₁)</span>
+<br>Параллельно: <span class="f">C = C₁+C₂</span> · Последоват.: <span class="f">1/C = 1/C₁+1/C₂</span>
+</div>
+<ul>
+<li>Параллельно — U одинаково · Последоват. — Q одинаков</li>
+</ul>
+</div>
+
+<!-- ========== 8–9 ========== -->
+<div class="section-title">Ток · билеты 8–9</div>
+
+<div class="card" id="b8">
+<h2><span class="num">8.</span> Электрический ток в проводнике. Сила и плотность тока. Сопротивление проводника. Закон Ома для однородного участка цепи. <span class="tag">!</span></h2>
+<div class="say"><b>Что сказать</b>Ток — упорядоченное движение зарядов. I = Q/t. R зависит от ρ, l, S. Закон Ома: I = U/R.</div>
+<div class="formulas"><b>Формулы</b>
+<span class="f">I = Q/t</span> · <span class="f">j = I/S</span> · <span class="f">R = ρl/S</span> · <span class="f">I = U/R</span>
+<br>R посл.: <span class="f">R = R₁+R₂</span> · R паралл.: <span class="f">1/R = 1/R₁+1/R₂</span>
+</div>
+<ul>
+<li>Направление тока: от + к − (условно)</li>
+<li>В металлах носители — электроны</li>
+</ul>
+</div>
+
+<div class="card" id="b9">
+<h2><span class="num">9.</span> Сторонние силы. ЭДС. Закон Ома для неоднородного участка цепи. Частные случаи. Закон Джоуля–Ленца. <span class="tag">!</span></h2>
+<div class="say"><b>Что сказать</b>Сторонние силы в источнике «качают» заряды. ε — работа на единичный заряд. Полная цепь: I = ε/(R+r). Тепло: Q = I²Rt.</div>
+<div class="formulas"><b>Формулы</b>
+<span class="f">ε = A_стор/q</span> · <span class="f">I = ε/(R+r)</span> · <span class="f">U_R = IR</span> · <span class="f">Q = I²Rt</span> · <span class="f">P = I²R = UI</span>
+</div>
+<ul>
+<li>КЗ: R=0 → I = ε/r (опасно!)</li>
+<li>Холостой ход: I=0 → U = ε</li>
+<li>КПД: η = R/(R+r)</li>
+</ul>
+</div>
+
+<!-- ========== 10–14 ========== -->
+<div class="section-title">Магнетизм · билеты 10–14</div>
+
+<div class="card" id="b10">
+<h2><span class="num">10.</span> Магнитное поле. Примеры таких полей. Правило правой руки. Принцип суперпозиции магнитных полей. <span class="tag">!</span></h2>
+<div class="say"><b>Что сказать</b>B — характеристика магнитного поля. Создают токи и магниты. Правая рука — направление B. B = ΣBᵢ.</div>
+<div class="formulas"><b>Формулы</b>
+провод: <span class="f">B = μ₀I/(2πr)</span> · соленоид: <span class="f">B = μ₀nI</span> · кольцо (центр): <span class="f">B = μ₀I/(2R)</span> · <span class="f">B = ΣBᵢ</span>
+</div>
+<ul>
+<li>Прав. рука (провод): палец→I, пальцы→B</li>
+<li>Прав. рука (соленоид): пальцы→I, большой→B</li>
+<li>Линии B — замкнутые; μ₀ = 4π·10⁻⁷ Гн/м</li>
+</ul>
+</div>
+
+<div class="card" id="b11">
+<h2><span class="num">11.</span> Закон Био–Савара–Лапласа. Поле кругового витка с током.</h2>
+<div class="say"><b>Что сказать</b>Каждый элемент провода dl с током создаёт dB. Интеграл даёт поле. В центре витка — главная формула.</div>
+<div class="formulas"><b>Формулы</b>
+<span class="f">dB = (μ₀/4π)·I[dl×r]/r³</span> · виток (центр): <span class="f">B = μ₀I/(2R)</span> · N витков: <span class="f">B = μ₀NI/(2R)</span>
+</div>
+<ul>
+<li>Ближе к проводу — сильнее (dB ~ 1/r³)</li>
+<li>Направление — правило правой руки по току в витке</li>
+</ul>
+</div>
+
+<div class="card" id="b12">
+<h2><span class="num">12.</span> Сила Лоренца. Работа силы Лоренца. <span class="tag">!</span></h2>
+<div class="say"><b>Что сказать</b>Магнитное поле действует на движущийся заряд. F перпендикулярна v → работа = 0, скорость не меняется по модулю.</div>
+<div class="formulas"><b>Формулы</b>
+<span class="f">F = q[v×B]</span> · <span class="f">F = qvB sinα</span> · <span class="f">R = mv/(qB)</span> · <strong>A = 0</strong>
+</div>
+<ul>
+<li>Левая рука: v, B → F (для + заряда)</li>
+<li>v ∥ B → F = 0 · v ⊥ B → F макс.</li>
+<li>Траектория в B: окружность или спираль</li>
+</ul>
+</div>
+
+<div class="card" id="b13">
+<h2><span class="num">13.</span> Сила Ампера. Закон Ампера. Физический смысл 1 А. <span class="tag">!</span></h2>
+<div class="say"><b>Что сказать</b>Сила на провод с током в поле B. 1 А — ток, при котором два провода на 1 м с I=1 А притягиваются с 2·10⁻⁷ Н/м.</div>
+<div class="formulas"><b>Формулы</b>
+<span class="f">F = BIl sinα</span> · векторно: <span class="f">F = I[l×B]</span> · определение 1А: <span class="f">F/l = 2·10⁻⁷ Н/м</span>
+</div>
+<ul>
+<li>Левая рука: I, B → F</li>
+<li>Динамик, двигатель — сила Ампера</li>
+</ul>
+</div>
+
+<div class="card" id="b14">
+<h2><span class="num">14.</span> Сила взаимодействия двух токов.</h2>
+<div class="say"><b>Что сказать</b>Каждый ток создаёт B, B действует на другой ток. Одно направление — притяжение, противоположные — отталкивание.</div>
+<div class="formulas"><b>Формулы</b>
+<span class="f">F/l = μ₀I₁I₂/(2πr)</span> · для 1А: <span class="f">F/l = 2·10⁻⁷ Н/м</span> при r=1м
+</div>
+<ul>
+<li>Механизм: B₁ на провод 2, и наоборот</li>
+<li>F ~ 1/r (медленнее, чем Кулон ~1/r²)</li>
+</ul>
+</div>
+
+<!-- ========== 15–19 ========== -->
+<div class="section-title">Диэлектрики и магнетики · 15–19</div>
+
+<div class="card" id="b15">
+<h2><span class="num">15.</span> Диэлектрики. Электрическое поле в диэлектрике. Виды поляризации.</h2>
+<div class="say"><b>Что сказать</b>Диэлектрик — изолятор. В поле поляризуется → E ослабляется в ε раз. Смещённая (электроны) и ориентационная (диполи).</div>
+<div class="formulas"><b>Формулы</b>
+<span class="f">E = E₀/ε</span> · вода: ε ≈ 80
+</div>
+<ul>
+<li>Смещённая — неполярные молекулы (H₂, O₂)</li>
+<li>Ориентационная — полярные (H₂O, HCl)</li>
+<li>Конденсатор с диэлектриком: C = ε·C₀</li>
+</ul>
+</div>
+
+<div class="card" id="b16">
+<h2><span class="num">16.</span> Поляризованность. Теорема Гаусса для вектора поляризации. Диэлектрическая восприимчивость. Диэлектрическая проницаемость.</h2>
+<div class="say"><b>Что сказать</b>P — дипольный момент на 1 м³. ε = 1+χ. На границе — связанные заряды.</div>
+<div class="formulas"><b>Формулы</b>
+<span class="f">P = ε₀χE</span> · <span class="f">ε = 1 + χ</span> · <span class="f">∮P·dS = −q_св</span>
+</div>
+<ul>
+<li>χ — восприимчивость, ε — проницаемость</li>
+<li>D = ε₀E + P (для справки)</li>
+</ul>
+</div>
+
+<div class="card" id="b17">
+<h2><span class="num">17.</span> Сегнетоэлектрики и их применение. Диэлектрический гистерезис. Пьезоэлектрики.</h2>
+<div class="say"><b>Что сказать</b>Сегнето — «память» поляризации. Гистерезис — петля P(E). Пьезо: механика ↔ электричество.</div>
+<div class="formulas"><b>Применение</b>
+Пьезозажигалка · УЗ-датчики · часы · сегнето: память, конденсаторы
+</div>
+<ul>
+<li>Прямой пьезоэффект: сжатие → заряд</li>
+<li>Обратный: напряжение → деформация</li>
+<li>Гистерезис — площадь петли = потери энергии</li>
+</ul>
+</div>
+
+<div class="card" id="b18">
+<h2><span class="num">18.</span> Намагниченность. Диамагнетики, парамагнетики, ферромагнетики.</h2>
+<div class="say"><b>Что сказать</b>I — магнитный момент на объём. Три класса по реакции на поле. Ферромагнетики — сильное притяжение.</div>
+<div class="formulas"><b>Формулы</b>
+<span class="f">I = χ_m H</span> · <span class="f">B = μ₀μH</span> · <span class="f">μ = 1 + χ_m</span>
+</div>
+<ul>
+<li>Диамагнетик: μ &lt; 1, выталкивается (Cu, H₂O)</li>
+<li>Парамагнетик: μ &gt; 1, слабо втягивается (Al, O₂)</li>
+<li>Ферромагнетик: μ &gt;&gt; 1 (Fe, Ni, Co)</li>
+</ul>
+</div>
+
+<div class="card" id="b19">
+<h2><span class="num">19.</span> Ферромагнетизм. Классификация ферромагнитных материалов. Петля гистерезиса. Антиферромагнетики, ферримагнетики.</h2>
+<div class="say"><b>Что сказать</b>Домены, обменное взаимодействие. Мягкие — трансформаторы, твёрдые — магниты. Петля B(H).</div>
+<div class="formulas"><b>Ключевое</b>
+Br — остаточная · Hc — принудительная · Bs — насыщение
+</div>
+<ul>
+<li>Мягкие: узкая петля, легко намагнитить/размагнитить</li>
+<li>Твёрдые: постоянные магниты</li>
+<li>Антиферро: ↑↓↑↓, сумма ≈ 0 · Ферри: ↑↑↓↓, ферриты</li>
+</ul>
+</div>
+
+<!-- ========== 20–35 ========== -->
+<div class="section-title">Оптика · билеты 20–35</div>
+
+<div class="card" id="b20">
+<h2><span class="num">20.</span> Законы геометрической оптики. Атмосферная рефракция. Явление полного внутреннего отражения. <span class="tag">!</span></h2>
+<div class="say"><b>Что сказать</b>Свет — лучи. Отражение и преломление. Атмосфера искривляет лучи — Солнце видно выше. ПВО — оптоволокно.</div>
+<div class="formulas"><b>Формулы</b>
+<span class="f">α = α'</span> · <span class="f">n₁sinα = n₂sinβ</span> · <span class="f">n = c/v</span> · ПВО: <span class="f">sinα₀ = n₂/n₁</span> (n₁&gt;n₂)
+</div>
+<ul>
+<li>Вода n≈1,33 · Стекло n≈1,5</li>
+<li>Закат: лучи преломляются в атмосфере</li>
+<li>Мираж — ПВО в нагретом воздухе</li>
+</ul>
+</div>
+
+<div class="card" id="b21">
+<h2><span class="num">21.</span> Когерентность световых волн. Проблема когерентности света. Способы получения когерентных волн.</h2>
+<div class="say"><b>Что сказать</b>Когерентны — постоянная Δφ, одна ν. Обычный свет — нет. Решение: делить один источник.</div>
+<div class="formulas"><b>Способы</b>
+Схема Юнга · бипризма Френеля · отражение от плёнки · лазер
+</div>
+<ul>
+<li>Длина когерентности лазера — метры</li>
+<li>Лампа — микроны, интерференция не видна</li>
+<li>Δφ = (2π/λ)·Δr</li>
+</ul>
+</div>
+
+<div class="card" id="b22">
+<h2><span class="num">22.</span> Интерференция света. Условия максимума и минимума интерференции. Расчёт схемы Юнга. <span class="tag">!</span></h2>
+<div class="say"><b>Что сказать</b>Сложение когерентных волн — усиление/ослабление. Юнг: две щели, полосы на экране.</div>
+<div class="formulas"><b>Формулы</b>
+макс: <span class="f">Δ = kλ</span> · мин: <span class="f">Δ = (2k+1)λ/2</span> · Юнг: <span class="f">Δx = λL/d</span> · <span class="f">x_k = kλL/d</span>
+</div>
+<ul>
+<li>Центр — светлый максимум (k=0)</li>
+<li>d — расстояние между щелями, L — до экрана</li>
+</ul>
+</div>
+
+<div class="card" id="b23">
+<h2><span class="num">23.</span> Интерференция света в тонких плёнках. Полосы равного наклона и полосы равной толщины.</h2>
+<div class="say"><b>Что сказать</b>Два отражённых луча от плёнки интерферируют. Мыльный пузырь — радуга.</div>
+<div class="formulas"><b>Формулы</b>
+<span class="f">Δ ≈ 2nh + λ/2</span> · макс: <span class="f">2nh = (2k−1)λ/2</span> · мин: <span class="f">2nh = kλ</span>
+</div>
+<ul>
+<li>Равного наклона: h = const, меняется угол</li>
+<li>Равной толщины: угол const, меняется h (клин, Ньютон)</li>
+</ul>
+</div>
+
+<div class="card" id="b24">
+<h2><span class="num">24.</span> Просветление оптики. Оптические аберрации. Интерференция в природе и технике.</h2>
+<div class="say"><b>Что сказать</b>Покрытие λ/4 гасит отражение. Аберрации — искажения линз. Интерференция — пузыри, интерферометры.</div>
+<div class="formulas"><b>Формулы</b>
+просветление: <span class="f">h = λ/(4n)</span>
+</div>
+<ul>
+<li>Сферическая — края линзы, разный фокус</li>
+<li>Хроматическая — разный n(λ), радужная кайма</li>
+<li>Применение: антибликовые покрытия, контроль плоскости</li>
+</ul>
+</div>
+
+<div class="card" id="b25">
+<h2><span class="num">25.</span> Кольца Ньютона.</h2>
+<div class="say"><b>Что сказать</b>Линза на стекле — воздушный зазор. h растёт с r → кольца. Полосы равной толщины.</div>
+<div class="formulas"><b>Формулы</b>
+<span class="f">h ≈ r²/(2R)</span> · тёмное кольцо k: <span class="f">r_k = √(kλR)</span>
+</div>
+<ul>
+<li>Контроль качества линз, измерение λ или R</li>
+</ul>
+</div>
+
+<div class="card" id="b26">
+<h2><span class="num">26.</span> Дифракция света. Принцип Гюйгенса–Френеля. Примеры проявления. Дифракция Френеля и Фраунгофера. Метод зон Френеля.</h2>
+<div class="say"><b>Что сказать</b>Огибание препятствий. Гюйгенс–Френель: вторичные волны + интерференция. Френель — близко, Фраунгофер — далеко.</div>
+<div class="formulas"><b>Зоны</b>
+чётные гасят · нечётные усиливают · 1 зона ≈ половина амплитуды
+</div>
+<ul>
+<li>Щель ~λ → сильная дифракция</li>
+<li>Решётка, CD — Фраунгофер</li>
+<li>Тень с размытыми краями — дифракция</li>
+</ul>
+</div>
+
+<div class="card" id="b27">
+<h2><span class="num">27.</span> Дифракция Френеля на круглом отверстии. Зонная пластинка.</h2>
+<div class="say"><b>Что сказать</b>Фронт делят на зоны Френеля. На экране — кольца. Зонная пластинка закрывает чётные зоны → ярче.</div>
+<div class="formulas"><b>Ключевое</b>
+1 зона открыта → макс. в центре · 2 зоны → мин. · усиление ~×4
+</div>
+<ul>
+<li>Зоны — кольца с Δr = λ/2 между соседними</li>
+</ul>
+</div>
+
+<div class="card" id="b28">
+<h2><span class="num">28.</span> Дифракция Френеля на круглом препятствии.</h2>
+<div class="say"><b>Что сказать</b>За диском в геометрической тени — светлое пятно Арago. Волновая природа света.</div>
+<div class="formulas"><b>Механизм</b>
+Волны с края диска интерферируют в фазе на оси
+</div>
+<ul>
+<li>Опыт подтвердил волновую теорию (vs корпускулы)</li>
+<li>Кольца вокруг центрального пятна</li>
+</ul>
+</div>
+
+<div class="card" id="b29">
+<h2><span class="num">29.</span> Дифракционная решётка. Разрешающая способность дифракционной решётки. Дифракция в технике. <span class="tag">!</span></h2>
+<div class="say"><b>Что сказать</b>Много щелей — узкие максимумы, хорошее разделение цветов. Спектрометры, CD.</div>
+<div class="formulas"><b>Формулы</b>
+<span class="f">d sinφ = kλ</span> · <span class="f">R = Nk = λ/Δλ</span>
+</div>
+<ul>
+<li>k=0 — центральный максимум · k=±1 — 1-й порядок спектра</li>
+<li>N — число щелей · Больше N → лучше разрешение</li>
+</ul>
+</div>
+
+<div class="card" id="b30">
+<h2><span class="num">30.</span> Получение голограмм.</h2>
+<div class="say"><b>Что сказать</b>Запись интерференции опорного и объектного лучей (лазер). Восстановление — дифракция, 3D-образ.</div>
+<div class="formulas"><b>Этапы</b>
+Запись на пластинку → проявление → освещение опорным лучом
+</div>
+<ul>
+<li>Нужна когерентность (лазер)</li>
+<li>Без опорного луча при чтении — нет 3D</li>
+</ul>
+</div>
+
+<div class="card" id="b31">
+<h2><span class="num">31.</span> Дисперсия света. Нормальная и аномальная дисперсия.</h2>
+<div class="say"><b>Что сказать</b>n зависит от λ. Нормальная: короткие λ → больше n (призма, радуга). Аномальная — у полосы поглощения.</div>
+<div class="formulas"><b>Формулы</b>
+нормальная: <span class="f">dn/dλ &lt; 0</span> · аномальная: <span class="f">dn/dλ &gt; 0</span>
+</div>
+<ul>
+<li>Призма: фиолетовый преломляется сильнее красного</li>
+<li>Хроматическая аберрация линз — из-за дисперсии</li>
+</ul>
+</div>
+
+<div class="card" id="b32">
+<h2><span class="num">32.</span> Поляризация света. Закон Малюса. <span class="tag">!</span></h2>
+<div class="say"><b>Что сказать</b>Поляризованный свет — E в одной плоскости. Поляризатор пропускает одну плоскость. I = I₀cos²α.</div>
+<div class="formulas"><b>Формулы</b>
+<span class="f">I = I₀ cos²α</span> · α=0° → I=I₀ · α=90° → I=0
+</div>
+<ul>
+<li>Скрещенные поляризаторы — полное гашение</li>
+<li>Очки от бликов, 3D-кино, ЖК-дисплеи</li>
+</ul>
+</div>
+
+<div class="card" id="b33">
+<h2><span class="num">33.</span> Поляризация света. Закон Брюстера.</h2>
+<div class="say"><b>Что сказать</b>При угле Брюстера отражённый свет полностью поляризован. Отражённый ⊥ преломлённому.</div>
+<div class="formulas"><b>Формулы</b>
+<span class="f">tan α_B = n₂/n₁</span> · <span class="f">α_B + β = 90°</span> · вода: α_B ≈ 53°
+</div>
+<ul>
+<li>Поляризационные очки гасят блики с воды/дороги</li>
+</ul>
+</div>
+
+<div class="card" id="b34">
+<h2><span class="num">34.</span> Поглощение света. Закон Бугера–Ламберта.</h2>
+<div class="say"><b>Что сказать</b>I экспоненциально падает в поглощающей среде. Закат, цветные стёкла, спектрофотометр.</div>
+<div class="formulas"><b>Формулы</b>
+<span class="f">I = I₀ e^(−κx)</span> · слабое: <span class="f">I ≈ I₀(1−κx)</span> · Бер: <span class="f">I = I₀e^(−εcx)</span>
+</div>
+<ul>
+<li>κ — коэффициент поглощения · x — толщина</li>
+</ul>
+</div>
+
+<div class="card" id="b35">
+<h2><span class="num">35.</span> Тепловое излучение. Законы излучения абсолютно чёрного тела. <span class="tag">!</span></h2>
+<div class="say"><b>Что сказать</b>АЧТ — идеальный излучатель/поглотатель. E ~ T⁴. Вин: пик спектра смещается к коротким λ при нагреве.</div>
+<div class="formulas"><b>Формулы</b>
+<span class="f">E = σT⁴</span> · <span class="f">λ_max·T = 2,9·10⁻³</span> м·К · <span class="f">T(К) = t(°C)+273</span>
+</div>
+<ul>
+<li>σ = 5,67·10⁻⁸ Вт/(м²·К⁴)</li>
+<li>Нагрев металла: красный → жёлтый → белый</li>
+<li>Реальное тело: E = εσT⁴</li>
+</ul>
+</div>
+
+<!-- ========== 36–42 ========== -->
+<div class="section-title">Квантовая и ядерная физика · 36–42</div>
+
+<div class="card" id="b36">
+<h2><span class="num">36.</span> Фотоэффект и его законы. <span class="tag">!</span></h2>
+<div class="say"><b>Что сказать</b>Свет выбивает электроны. E_k зависит только от ν, число e — от яркости. Ниже ν₀ — нет эффекта. Доказательство фотонов.</div>
+<div class="formulas"><b>Формулы</b>
+<span class="f">E = hν = hc/λ</span> · <span class="f">hν = A_вых + E_k max</span> · <span class="f">hν₀ = A_вых</span> · <span class="f">eU_з = E_k</span>
+</div>
+<ul>
+<li>Закон 1: I_фото ~ яркость · Закон 2: E_k от ν · Закон 3: красная граница</li>
+<li>Солнечные батареи, фоторезисторы</li>
+</ul>
+</div>
+
+<div class="card" id="b37">
+<h2><span class="num">37.</span> Эффект Комптона.</h2>
+<div class="say"><b>Что сказать</b>Рентген на электронах — λ увеличивается. Фотон отдаёт часть энергии. Классика не объясняет. p = h/λ.</div>
+<div class="formulas"><b>Формулы</b>
+<span class="f">Δλ = (h/m_e c)(1−cosθ)</span> · Λ = 2,43 пм · <span class="f">p = h/λ</span>
+</div>
+<ul>
+<li>θ=90°: Δλ = Λ · θ=180°: Δλ = 2Λ (макс.)</li>
+<li>Фотоэффект — поглошение, Комптон — рассеяние</li>
+</ul>
+</div>
+
+<div class="card" id="b38">
+<h2><span class="num">38.</span> Корпускулярно-волновой дуализм света. Волны де Бройля. <span class="tag">!</span></h2>
+<div class="say"><b>Что сказать</b>Свет — и волна (интерференция), и частица (фотоэффект). Любая частица: λ = h/p. Электроны дифрагируют.</div>
+<div class="formulas"><b>Формулы</b>
+фотон: <span class="f">E = hν</span>, <span class="f">p = h/λ</span> · де Бройль: <span class="f">λ = h/p = h/(mv)</span>
+</div>
+<ul>
+<li>Дуализм заметен в микромире, не у мячиков</li>
+<li>Электронный микроскоп — короткая λ → резкость</li>
+</ul>
+</div>
+
+<div class="card" id="b39">
+<h2><span class="num">39.</span> Теория Бора. Атом водорода по Бору. <span class="tag">!</span></h2>
+<div class="say"><b>Что сказать</b>Стационарные орбиты, на них не излучает. Переходы — кванты hν. Объяснил спектр H.</div>
+<div class="formulas"><b>Формулы</b>
+<span class="f">mvr = nh/(2π)</span> · <span class="f">E_n = −13,6/n²</span> эВ · <span class="f">hν = E_i − E_f</span> · <span class="f">r_n = n²r₁</span>
+</div>
+<ul>
+<li>n=1: E=-13,6 эВ (ионизация) · Серия Бальмера: переходы на n=2</li>
+<li>Модель полуклассическая, только для H и подобных</li>
+</ul>
+</div>
+
+<div class="card" id="b40">
+<h2><span class="num">40.</span> Квантовая теория атомов. Правила заполнения таблицы Менделеева.</h2>
+<div class="say"><b>Что сказать</b>Электроны на орбиталях. Паули, Клечковский, Хунд объясняют структуру таблицы.</div>
+<div class="formulas"><b>Правила</b>
+Паули: max 2e, спины разные · Клечковский: 1s 2s 2p 3s 3p 4s 3d 4p… · Хунд: max неспаренных
+</div>
+<ul>
+<li>s:2, p:6, d:10, f:14 электронов</li>
+<li>Группы — похожая внешняя конфигурация</li>
+</ul>
+</div>
+
+<div class="card" id="b41">
+<h2><span class="num">41.</span> Опыты Резерфорда. Состав ядра атома. Изотопы. Энергия связи ядра. Дефект массы. <span class="tag">!</span></h2>
+<div class="say"><b>Что сказать</b>α на фольге → маленькое ядро. Z протонов, N нейтронов. Изотопы — один Z. E_св = Δmc².</div>
+<div class="formulas"><b>Формулы</b>
+<span class="f">ᴬ_Z X</span>, A=Z+N · <span class="f">Δm = Zm_p + Nm_n − M_ядра</span> · <span class="f">E_св = Δm·c²</span> · 1 а.е.м. ≈ 931 МэВ
+</div>
+<ul>
+<li>Резерфорд: большинство α прошли, немногие отскочили</li>
+<li>Ядро ~10⁻¹⁵ м, атом ~10⁻¹⁰ м</li>
+<li>Макс. ε на нуклон — около железа Fe</li>
+</ul>
+</div>
+
+<div class="card" id="b42">
+<h2><span class="num">42.</span> Стабильные и нестабильные ядра. Радиоактивность. Закон радиоактивного распада. Период полураспада. <span class="tag">!</span></h2>
+<div class="say"><b>Что сказать</b>Нестабильные ядра распадаются сами. N убывает экспоненциально. T½ — время, за которое остаётся половина.</div>
+<div class="formulas"><b>Формулы</b>
+<span class="f">N = N₀ e^(−λt)</span> · <span class="f">N = N₀·2^(−t/T½)</span> · <span class="f">T½ = 0,693/λ</span> · <span class="f">A = λN</span>
+</div>
+<ul>
+<li>α: Z−2, A−4 · β⁻: n→p, Z+1 · γ: фотон</li>
+<li>T½ не зависит от N₀, T, химии</li>
+<li>¹⁴C: T½=5730 лет — датирование</li>
+</ul>
+</div>
+
+<!-- ========== CONST ========== -->
+<div class="card" id="const">
+<h2>Константы и мнемоники</h2>
+<div class="const-grid">
+<span>k = 9·10⁹ Н·м²/Кл²</span><span>ε₀ = 8,85·10⁻¹² Ф/м</span>
+<span>μ₀ = 4π·10⁻⁷ Гн/м</span><span>e = 1,6·10⁻¹⁹ Кл</span>
+<span>h = 6,63·10⁻³⁴ Дж·с</span><span>c = 3·10⁸ м/с</span>
+<span>σ = 5,67·10⁻⁸ Вт/(м²·К⁴)</span><span>b = 2,9·10⁻³ м·К</span>
+<span>m_e = 9,1·10⁻³¹ кг</span><span>1 а.е.м. ≈ 931 МэВ</span>
+</div>
+<ul style="margin-top:8px">
+<li><strong>Правая рука</strong> → направление B · <strong>Левая</strong> → F (Лоренц, Ампер)</li>
+<li>Конденсаторы: параллельно C₁+C₂ (наоборот R!)</li>
+<li>Интерференция: макс. Δ=kλ · мин. Δ=(2k+1)λ/2</li>
+<li>Лоренц: <strong>работа = 0</strong></li>
+<li>E=σT⁴: T только в <strong>Кельвинах</strong></li>
+<li>Фотоэффект: E_k от <strong>цвета</strong> (ν), число e от <strong>яркости</strong></li>
+</ul>
+</div>
+
+</body>
+</html>
